@@ -1,0 +1,14 @@
+[
+    {
+        "codigo": 1,
+        "nome": "Laço Páscoa",
+        "descricao": "Laço enfeitado com coelho de páscoa",
+        "img": "img1"
+    },
+    {
+        "codigo": 2,
+        "nome": "Laço de Natal",
+        "descricao": "Laço decorado de natal",
+        "img": "img2"
+    }
+]

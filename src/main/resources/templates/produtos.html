@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Produtos</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <h2>Produtos</h2>
+    <table class="table" id="produtos">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Imagem</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+<script>
+
+
+
+
+var xmlhttp = new XMLHttpRequest();
+var url = "http://localhost:8080/api/produtos";
+
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var myArr = JSON.parse(this.responseText);
+    myFunction(myArr);
+    console.log("ReadState = " + this.readyState + " Status = " + this.status);
+  }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function myFunction(arr) {
+  var i;
+
+var table = document.getElementById('produtos');
+for(i = 0; i < arr.length; i++) {
+
+    var tr = document.createElement('tr');
+    var td1 = document.createElement('td');
+    var td2 = document.createElement('td');
+    var td3 = document.createElement('td');
+    var td4 = document.createElement('td');
+
+
+    var text1 = document.createTextNode(arr[i].nome);
+    var text2 = document.createTextNode(arr[i].descricao);
+    var text3 = document.createTextNode(arr[i].img);
+    //var text4 = document.createTextNode("Editar");
+
+    const a = document.createElement('a');
+    a.setAttribute('href', '/produto/' + arr[i].codigo);
+    a.innerHTML = 'Editar';
+    document.body.appendChild(a);
+
+    td1.appendChild(text1);
+    td2.appendChild(text2);
+    td3.appendChild(text3);
+    td4.appendChild(a);
+
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+
+
+    table.appendChild(tr);
+}
+document.body.appendChild(table);
+
+}
+</script>
+
+</body>
+</html>

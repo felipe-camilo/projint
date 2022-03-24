@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+<div class="container mt-3">
+
+    <script>
+
+
+
+
+var xmlhttp = new XMLHttpRequest();
+var url = "http://localhost:8080/api/produto/1";
+
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    var produtos = JSON.parse(this.responseText);
+    exibirProdutos(produtos);
+    console.log("ReadState = " + this.readyState + " Status = " + this.status);
+  }
+};
+xmlhttp.open("GET", url, true);
+xmlhttp.send();
+
+function exibirProdutos(prod) {
+  //console.log(prod);
+  //console.log(prod.nome);
+  document.getElementById("codigo").value = prod.codigo;
+  document.getElementById("nome").value = prod.nome;
+  document.getElementById("descricao").value = prod.descricao;
+  document.getElementById("img").value = prod.img;
+
+
+
+}
+</script>
+
+    <form action="/">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Código" id="codigo" name="codigo">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Nome" id="nome" name="nome">
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Descrição" id="descricao" name="descricao">
+        </div>
+
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Imagem" id="img" name="img">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>
